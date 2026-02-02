@@ -1,1 +1,151 @@
-<p>Luke?</p><button id=d>D</button><button id=r>R</button><script>r.onclick=_=>r.style.cssText=`position:fixed;left:${Math.random()*90}vw;top:${Math.random()*90}vh`;d.onclick=_=>document.body.innerHTML="🎉🐴💙"</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Luke’s Political Alignment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #e6f0ff, #ffffff);
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 15px 30px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      transition: transform 0.2s ease;
+    }
+
+    #democrat {
+      background-color: #2e6ef7;
+      color: white;
+      left: -120px;
+    }
+
+    #republican {
+      background-color: #e63946;
+      color: white;
+      left: 120px;
+    }
+
+    /* Celebration overlay */
+    .celebration {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle, #2e6ef7, #0a1e4a);
+      color: white;
+      z-index: 10;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    .celebration h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .donkey {
+      font-size: 6rem;
+      animation: bounce 1s infinite;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 14px;
+      background: #2e6ef7;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      from {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Is Luke a Republican or a Democrat?</h1>
+    <button id="democrat">Democrat</button>
+    <button id="republican">Republican</button>
+  </div>
+
+  <div class="celebration" id="celebration">
+    <h2>🎉 DEMOCRAT ENERGY 🎉</h2>
+    <div class="donkey">🐴</div>
+    <p>Blue wave activated</p>
+  </div>
+
+  <script>
+    const republicanBtn = document.getElementById("republican");
+    const democratBtn = document.getElementById("democrat");
+    const celebration = document.getElementById("celebration");
+
+    function moveButton() {
+      const x = Math.random() * (window.innerWidth - 150);
+      const y = Math.random() * (window.innerHeight - 100);
+      republicanBtn.style.left = `${x}px`;
+      republicanBtn.style.top = `${y}px`;
+    }
+
+    republicanBtn.addEventListener("mouseover", moveButton);
+    republicanBtn.addEventListener("click", moveButton);
+
+    democratBtn.addEventListener("click", () => {
+      celebration.style.display = "flex";
+      spawnConfetti();
+    });
+
+    function spawnConfetti() {
+      for (let i = 0; i < 120; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.animationDelay = Math.random() * 3 + "s";
+        confetti.style.background = Math.random() > 0.5 ? "#2e6ef7" : "#ffffff";
+        document.body.appendChild(confetti);
+      }
+    }
+  </script>
+
+</body>
+</html>
